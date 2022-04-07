@@ -1,4 +1,5 @@
 import JobCard from "./JobCard"
+import SearchBar from './SearchBar'
 export default function Jobs( { jobs } ){
     const displayJobs = jobs === [] ? 'Loading...' : jobs.map(job => {
         return(
@@ -14,8 +15,14 @@ export default function Jobs( { jobs } ){
         )
     } )
     return(
-        <div>
-            {displayJobs}
+        <div className="flex" >
+            <div className="w-3/4 ">
+                
+                {displayJobs}
+            </div>
+            <div className="w-1/4 m-8" >
+                <SearchBar />
+            </div>
         </div>
 
     )
