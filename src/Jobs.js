@@ -3,11 +3,12 @@ export default function Jobs( { jobs } ){
     const displayJobs = jobs === [] ? 'Loading...' : jobs.map(job => {
         return(
             <div key={job.id} >
-                <JobCard  
+                <JobCard 
                     title={job.title}
                     description={job.description.replace(/<[^>]+>/g, '')}
                     company_name={job.company_name}  
                     salary={job.salary === '' ? 'Best in Industry' : job.salary}
+                    tags = {job.tags}
                 />
             </div>
         )

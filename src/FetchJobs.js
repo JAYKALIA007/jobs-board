@@ -16,7 +16,6 @@ export default function FetchJobs(){
 
     return(
         <div>
-            <p>Fetch jobs</p>
             <Jobs jobs={jobs}/>
         </div>
     )
