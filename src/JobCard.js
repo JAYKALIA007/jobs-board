@@ -1,5 +1,4 @@
 import { useState } from "react"
-import SearchBar from "./SearchBar"
 export default function JobCard( { title, description, company_name, salary, tags  }){
     const [ showDetails , setShowDetails ] = useState(false)
     function handleShowDetails(){
@@ -12,7 +11,7 @@ export default function JobCard( { title, description, company_name, salary, tag
     return(
         <div  >
             
-            <div className=" text-gray-800 bg-white rounded-xl px-10 py-5 mx-20  my-5 drop-shadow-xl hover:drop-shadow-2xl ">
+            <div className=" text-gray-600 bg-white rounded-xl px-10 py-5 mx-20  my-5 drop-shadow-xl hover:drop-shadow-2xl ">
                 <h3 className=" text-xl font-bold " >{title}</h3>
                 <h3 className=" font-bold " >{company_name}</h3>
                 <p>{details}</p>

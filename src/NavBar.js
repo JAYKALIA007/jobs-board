@@ -2,7 +2,7 @@ export default function NavBar(){
     return(
         <div className="max-w-full text-gray-200 bg-gradient-to-r from-blue-700 to-blue-300  p-5 flex " >
             <div className=" w-1/2 m-2 " >
-                <h2 className="text-2xl " >NavBar</h2>
+                <h2 className="text-2xl " >Jobs Board</h2>
             </div>
             <div className=" w-1/2 m-2 " >
                 {/* style the navbar with grid cols so that it's responsive */}
