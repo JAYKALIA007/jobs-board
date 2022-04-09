@@ -1,8 +1,12 @@
 import axios from 'axios';
 import DisplayCategories from './DisplayCategories'
 import {useState , useEffect }  from "react"
-export default function Categories(){
+export default function Categories( { callback  }){
     const [categories,setCategories] = useState([])
+    function callbackToFetchJobs(response){
+        // console.log(response)
+        callback(response)
+    }
     useEffect(()=>{
         if(categories.length === 0){
             axios.get('http://127.0.0.1:5000/get_categories')
@@ -25,7 +29,7 @@ export default function Categories(){
     return(
         <div className='my-12 mx-2'>
             <strong className='text-gray-600 text-2xl italic ' >Filter via categories : </strong>
-            <DisplayCategories categories={categories[0]} />
+            <DisplayCategories categories={categories[0]}  callbackToCategoryComponent={callbackToFetchJobs} />
             {/* {console.log(categories[0])} */}
         </div>
     )

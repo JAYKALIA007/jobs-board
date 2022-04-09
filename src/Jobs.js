@@ -1,8 +1,11 @@
 import JobCard from "./JobCard"
-import SearchBar from './SearchBar'
-import Categories from './Categories'
 export default function Jobs( { jobs } ){
-    const displayJobs = jobs === [] ? 'Loading...' : jobs.map(job => {
+
+    // jobs array sliced so as to show only 10 jobs at a time
+    // later try to implement next page feature
+    const slicedJobsArray = jobs === [] ? [] :jobs.slice(0, 10);
+
+    const displayJobs = slicedJobsArray.map(job => {
         return(
             <div key={job.id} >
                 <JobCard 
@@ -16,14 +19,8 @@ export default function Jobs( { jobs } ){
         )
     } )
     return(
-        <div className="flex" >
-            <div className="w-3/4 ">
-                {displayJobs}
-            </div>
-            <div className="w-1/4 m-8" >
-                <SearchBar />
-                <Categories/>
-            </div>
+        <div>
+            {displayJobs}
         </div>
 
     )
