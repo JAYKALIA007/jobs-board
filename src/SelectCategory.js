@@ -1,4 +1,5 @@
 import {useState  } from "react"
+import axios from 'axios'
 export default function SelectCategory( { categoryObj , callback } ) {
     const [isSelected , setIsSelected] = useState(categoryObj.selected)
     return(
@@ -10,6 +11,15 @@ export default function SelectCategory( { categoryObj , callback } ) {
                     categoryObj.selected = !categoryObj.selected
                     setIsSelected(categoryObj.selected)
                     callback(categoryObj)
+                    
+                    if(categoryObj.selected){
+                        axios.get('http://127.0.0.1:5000/get_jobs_by_category',{ params : categoryObj})
+                        .then(res=>{
+                            console.log(res.data);
+                        })
+                        .catch(err=>{console.log(err)})
+                    }
+
                 }}  >
 
                     {categoryObj.category} 
