@@ -1,5 +1,6 @@
 import { useState } from "react"
-export default function JobCard( { title, description, company_name, salary, tags  }){
+import { Link } from "react-router-dom"
+export default function JobCard( { title, description, company_name, salary, tags, id  }){
     const [ showDetails , setShowDetails ] = useState(false)
     function handleShowDetails(){
         setShowDetails(!showDetails)
@@ -15,18 +16,9 @@ export default function JobCard( { title, description, company_name, salary, tag
                 <h3 className=" text-xl font-bold " >{title}</h3>
                 <h3 className=" font-bold " >{company_name}</h3>
                 <p>{details}</p>
-                {/* <div className="flex" >
-                    <div className=" w-1/2 font-bold">
-                        <p>{salary}</p> 
-                    </div>
-                    <div className="  w-1/2 text-gray-100 text-right  " > 
-                        <button className=" bg-gradient-to-r from-blue-600 to-blue-400 hover:from-blue-900 hover:to-blue-600 ...  px-3 py-1  rounded-md  hover:scale-105 duration-100 " onClick={handleShowDetails}  >
-                            {showMoreButtonText}
-                        </button>
-                    </div>
-                </div> */}
-                <div className="font-bold">
-                    <p>{salary}</p> 
+                <div >
+                    <p className="inline-block " >Salary : </p> &nbsp;
+                    <p className="font-bold inline-block" >{salary}</p> 
                 </div>
                 <div className="flex" >
                     <div className="w-5/6 " >
@@ -44,6 +36,12 @@ export default function JobCard( { title, description, company_name, salary, tag
                         <button className=" bg-gradient-to-r from-blue-600 to-blue-400 hover:from-blue-900 hover:to-blue-600 ...  px-3 py-1  rounded-md  hover:scale-105 duration-100 " onClick={handleShowDetails}  >
                             {showMoreButtonText}
                         </button>
+
+                        {showDetails && 
+                            <Link to={`/apply/jobId=${id}`} >
+                            <button className=" bg-gradient-to-r from-blue-600 to-blue-400 hover:from-blue-900 hover:to-blue-600 ...  px-3 py-1  rounded-md  hover:scale-105 duration-100 mt-12" > Apply </button>
+                            </Link>
+                        }
                     </div>
                 </div>
             </div>

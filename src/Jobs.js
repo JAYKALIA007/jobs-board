@@ -14,6 +14,7 @@ export default function Jobs( { jobs } ){
                     company_name={job.company_name}  
                     salary={job.salary === '' ? 'Best in Industry' : job.salary}
                     tags = {job.tags}
+                    id={job.id}
                 />
             </div>
         )
