@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
-export default function JobCard( { title, description, company_name, salary, tags, id  }){
+export default function JobCard( { title, description, company_name, salary, tags, id, category  }){
     const [ showDetails , setShowDetails ] = useState(false)
     function handleShowDetails(){
         setShowDetails(!showDetails)
@@ -19,6 +19,12 @@ export default function JobCard( { title, description, company_name, salary, tag
                 <div >
                     <p className="inline-block " >Salary : </p> &nbsp;
                     <p className="font-bold inline-block" >{salary}</p> 
+                    <br/>
+                    <div className="inline-block " > Category :
+                    <p className=" inline-block px-5 text-blue-700 font-bold bg-slate-200 rounded-md m-1" >
+                                            {category}
+                    </p>
+                </div>
                 </div>
                 <div className="flex" >
                     <div className="w-5/6 " >

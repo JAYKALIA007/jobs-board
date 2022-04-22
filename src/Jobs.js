@@ -1,6 +1,5 @@
 import JobCard from "./JobCard"
 export default function Jobs( { jobs } ){
-
     // jobs array sliced so as to show only 10 jobs at a time
     // later try to implement next page feature
     const slicedJobsArray = jobs === [] ? [] :jobs.slice(0, 10);
@@ -15,6 +14,7 @@ export default function Jobs( { jobs } ){
                     salary={job.salary === '' ? 'Best in Industry' : job.salary}
                     tags = {job.tags}
                     id={job.id}
+                    category={job.category}
                 />
             </div>
         )
