@@ -1,70 +1,38 @@
-# Getting Started with Create React App
+# About
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a full stack jobs board app where you can apply to jobs. It uses the [remotive jobs API](https://github.com/remotive-com/remote-jobs-api).
 
-## Available Scripts
+## Available Functionalities
 
-In the project directory, you can run:
+In the project directory, you can:
 
-### `npm start`
+### `view jobs`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Shows a list of jobs from where you can view and apply to job based on your liking.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### `filter jobs based on category`
 
-### `npm test`
+The home page has **_`category filters`_** which shows results accordingly when selected. 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+For this, API was built accordingly at _**[jobs-board-backend](https://github.com/JAYKALIA007/jobs-board-backend).**_
 
-### `npm run build`
+### `filter jobs via search term`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+The home page has a **_`search bar`_** which filters results accordingly.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+For this, API was built accordingly at _**[jobs-board-backend](https://github.com/JAYKALIA007/jobs-board-backend).**_
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### `login/signup to apply to jobs`
 
-### `npm run eject`
+If you decide to go ahead and apply to a job, you'll come across an alert which asks you to **_`login/signup`_**.
+The authentication has been implemented using _**[Auth0](https://auth0.com/)**._
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### `apply to jobs`
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Once you're logged in to the website, you can finally go ahead and apply to a job.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+When you click on Apply it will direct you to a **_`multi-page form`_** wherein you can enter **_`personal information, education and job details`_**. 
+You can also _**`go back and edit each form`**_ wihtout worrying about the data getting lost.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Finally, once you've confirmed the details. Click on apply.
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
