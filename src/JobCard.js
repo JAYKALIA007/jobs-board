@@ -1,13 +1,20 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
+import { useAuth0 } from "@auth0/auth0-react";
+
 export default function JobCard( { title, description, company_name, salary, tags, id, category  }){
+
+    const { isAuthenticated } = useAuth0();
+
     const [ showDetails , setShowDetails ] = useState(false)
     function handleShowDetails(){
         setShowDetails(!showDetails)
     }
     const shortDescription = description.split('. ')[0].substring(0,100) + `...`
     let showMoreButtonText = showDetails ? `Show Less` : `Show More`
-
+    function handleAlertClick(){
+        alert('JOBS BOARD wants you to Login to continue.')
+    }
     const details = showDetails ? description : shortDescription;
     return(
         <div  >
@@ -42,11 +49,17 @@ export default function JobCard( { title, description, company_name, salary, tag
                         <button className=" bg-gradient-to-r from-blue-600 to-blue-400 hover:from-blue-900 hover:to-blue-600 ...  px-3 py-1  rounded-md  hover:scale-105 duration-100 " onClick={handleShowDetails}  >
                             {showMoreButtonText}
                         </button>
-
-                        {showDetails && 
+                        {/* if user signed in then redirect to apply form */}
+                        {
+                            isAuthenticated && showDetails && 
                             <Link to={`/apply/jobId=${id}`} >
                             <button className=" bg-gradient-to-r from-blue-600 to-blue-400 hover:from-blue-900 hover:to-blue-600 ...  px-3 py-1  rounded-md  hover:scale-105 duration-100 mt-12" > Apply </button>
                             </Link>
+                        }
+                        {/* if user not signed in then alert message */}
+                        {
+                            !isAuthenticated && showDetails && 
+                            <button className=" bg-gradient-to-r from-blue-600 to-blue-400 hover:from-blue-900 hover:to-blue-600 ...  px-3 py-1  rounded-md  hover:scale-105 duration-100 mt-12" onClick={handleAlertClick}> Apply </button>
                         }
                     </div>
                 </div>
