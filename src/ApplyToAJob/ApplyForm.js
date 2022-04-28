@@ -6,53 +6,60 @@ import FinalConfirmationForm from './FinalConfirmationForm'
 import axios from "axios"
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { v4 as uuidv4 } from 'uuid';
 
 export default function ApplyForm(){
     const { jobId } = useParams()
-    let [formNo , setFormNo] = useState(1)
+    // let [formNo , setFormFields] = useState(1)
     const [isSubmitted , setIsSubmitted] = useState(false)
     const [ formFields , setFormFields ] = useState (  { 
     
-        // formNo : 1,
+        formNo : 1,
 
         //user details form fields
-        firstName : '',
-        lastName : '',
-        dob:'',
-        address: '',
-
+        userInfo :{
+            firstName : '',
+            lastName : '',
+            dob:'',
+            address: '',
+        },
         //study details form fields
-        highestEducation: '',
-        institutionName: '',
-        branch: '',
-        grade: '',
-
+        educationInfo : [{
+            id: uuidv4(),
+            highestEducation: '',
+            institutionName: '',
+            branch: '',
+            grade: '',
+        }],
         //job exp form fields
-
-        noOfYears: 0,
-        designation:'',
-        companyName: '',
+        jobExperienceInfo :[{
+            id: uuidv4(),
+            noOfYears: 0,
+            designation:'',
+            companyName: '',
+        }]
 
      } )
 
-    function nextPage(){
-        setFormNo( formNo++ );
+    function nextPage(e){
+        setFormFields( {...formFields , formNo : ++e.target.value} );
     }
-
-    function prevPage(){
-        setFormNo( formNo-- );
+    
+    function prevPage(e){
+        setFormFields( {...formFields , formNo : --e.target.value} );
         setIsSubmitted(false);   //toggle so that 
     }
 
     function handleChange(e){
         setFormFields({
             ...formFields,
+            userInfo :{ ...formFields.userInfo,
             [e.target.name]: e.target.value
+            }
         })
     }
     async function handleSubmit(e){
         e.preventDefault();
-        console.log(formFields)
 
         try {
             const res = await axios.post('http://127.0.0.1:5000/apply',{ jobId:jobId , userDetails : formFields })
@@ -65,6 +72,51 @@ export default function ApplyForm(){
         setTimeout(function() {
             window.location.replace('/');
           }, 2000);
+    }
+    function handleAddRowToForms(formName){
+        console.log(formName);
+        if(formName === 'education details form'){
+            setFormFields({
+                ...formFields,
+                educationInfo : [...formFields.educationInfo , {
+                    id: uuidv4(),
+                    highestEducation: '',
+                    institutionName: '',
+                    branch: '',
+                    grade: ''
+                }]
+            })
+        }
+        else{
+            setFormFields( {
+                ...formFields,
+                jobExperienceInfo : [...formFields.jobExperienceInfo,{
+                    id: uuidv4(),
+                    noOfYears: 0,
+                    designation:'',
+                    companyName: '',
+                }]
+            })
+        }
+    }
+
+    function handleChangeEduForm(id,event){
+        const updatedEdInfo = formFields.educationInfo.map(edInfo => {
+            if(id === edInfo.id){
+                edInfo[event.target.name] = event.target.value;
+            }
+            return edInfo;
+        })
+        setFormFields({...formFields,educationInfo: updatedEdInfo})
+    }
+    function handleChangeJobExpForm(id,event){
+        const updatedJobExInfo = formFields.jobExperienceInfo.map(jobExInfo => {
+            if(id === jobExInfo.id){
+                jobExInfo[event.target.name] = event.target.value;
+            }
+            return jobExInfo;
+        })
+        setFormFields({...formFields,jobExperienceInfo: updatedJobExInfo})
     }
 
     const submittedText = <div className="flex text-center text-gray-600 ">
@@ -80,13 +132,13 @@ export default function ApplyForm(){
             </div>
         </div>
     
-    switch(formNo) {
-        case 1: return (<UserDetailsForm formNo={formNo}  nextPage={nextPage} handleChange={handleChange} formFields={formFields} />)
-        case 2 : return (<StudyDetailsForm formNo={formNo} nextPage={nextPage} prevPage={prevPage}  handleChange={handleChange} formFields={formFields} />)
-        case 3 : return (<JobDetailsForm formNo={formNo} nextPage={nextPage} prevPage={prevPage}  handleChange={handleChange} formFields={formFields} />)  
+    switch(formFields.formNo) {
+        case 1: return (<UserDetailsForm  nextPage={nextPage} handleChange={handleChange} formFields={formFields} />)
+        case 2 : return (<StudyDetailsForm nextPage={nextPage} prevPage={prevPage}  handleChange={handleChangeEduForm} formFields={formFields} handleAddRowToEducationForm={handleAddRowToForms}/>)
+        case 3 : return (<JobDetailsForm nextPage={nextPage} prevPage={prevPage}  handleChange={handleChangeJobExpForm} formFields={formFields} handleAddRowToJobExpForm={handleAddRowToForms}/>)  
         default : return (
             <>
-                <FinalConfirmationForm formNo={formNo} prevPage={prevPage} handleChange={handleChange} formFields={formFields} handleSubmit={handleSubmit} isSubmitted={isSubmitted}/>
+                <FinalConfirmationForm prevPage={prevPage} handleChange={handleChange} formFields={formFields} handleSubmit={handleSubmit} isSubmitted={isSubmitted}/>
                 { isSubmitted &&  submittedText }
             </>
         )
