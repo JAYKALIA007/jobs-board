@@ -1,10 +1,11 @@
 import JobCard from "./JobCard"
 export default function Jobs( { jobs } ){
-    // jobs array sliced so as to show only 10 jobs at a time
-    // later try to implement next page feature
-    const slicedJobsArray = jobs === [] ? [] :jobs.slice(0, 10);
 
-    const displayJobs = slicedJobsArray.map(job => {
+    const displayJobs = jobs===[] ? (
+    <div className="text-slate-400  italic">
+        Loading categories. Hang on...
+    </div>
+    ) : jobs.map(job => {
         return(
             <div key={job.id} >
                 <JobCard 
