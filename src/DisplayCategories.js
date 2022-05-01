@@ -1,10 +1,11 @@
 import SelectCategory from "./SelectCategory"
 import { useState,useEffect } from 'react'
-export default function DisplayCategories( { categories, callbackToCategoryComponent }){
+export default function DisplayCategories( { categories , callbackFilterTerm }){
     const [reload,setReload] = useState(false)
     useEffect(() => {},[reload])
-    function callback(categoryObj){
-        // console.log(categoryObj)
+
+    // function to unselect all other categories when one is selected
+    function callbackToUnselectOthers(categoryObj){
         for(let tempCategory of categories){
             if(tempCategory.category !== categoryObj.category && categoryObj.selected){
                 tempCategory.selected = false;
@@ -12,10 +13,7 @@ export default function DisplayCategories( { categories, callbackToCategoryCompo
         }
         setReload(!reload)
     }
-    function callback2(response){
-        // console.log(response)
-        callbackToCategoryComponent(response)
-    }
+
     const displayCategories = categories === undefined ? (
     <div className="text-slate-400  italic">
         Loading categories. Hang on...
@@ -23,7 +21,7 @@ export default function DisplayCategories( { categories, callbackToCategoryCompo
     ) :
     categories.map(category => {
             return(
-                <SelectCategory categoryObj={category} key={Math.random()} callback={callback} callback2={callback2} />
+                <SelectCategory categoryObj={category} key={Math.random()} callbackToUnselectOthers={callbackToUnselectOthers} callbackFilterTerm={callbackFilterTerm} />
                 )
         })
 

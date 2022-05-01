@@ -1,6 +1,5 @@
 import {useState  } from "react"
-import axios from 'axios'
-export default function SelectCategory( { categoryObj , callback , callback2 } ) {
+export default function SelectCategory( { categoryObj , callbackToUnselectOthers , callbackFilterTerm} ) {
     const [isSelected , setIsSelected] = useState(categoryObj.selected)
     return(
         <div className = 
@@ -10,18 +9,12 @@ export default function SelectCategory( { categoryObj , callback , callback2 } )
                 <p className="px-2   " onClick={()=>{
                     categoryObj.selected = !categoryObj.selected
                     setIsSelected(categoryObj.selected)
-                    callback(categoryObj)
-                    
+                    callbackToUnselectOthers(categoryObj)
                     if(categoryObj.selected){
-                        axios.get('http://127.0.0.1:5000/get_jobs_by_category',{ params : categoryObj})
-                        .then(res=>{
-                            // console.log(res.data);
-                            callback2(res.data)
-                        })
-                        .catch(err=>{console.log(err)})
+                        callbackFilterTerm(categoryObj.category)
                     }
                     else{
-                        callback2('No category selected')
+                        callbackFilterTerm('')
                     }
 
                 }}  >
