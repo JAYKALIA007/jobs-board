@@ -1,29 +1,32 @@
 import { useState } from "react"
 import axios from "axios"
-export default function SearchBar( { callback }){
+export default function SearchBar( { callback , callbackSearchTerm }){
     const [searchTerm , setSearchTerm] = useState('')
     const [searchIsActive , setSearchIsActive] = useState(false)
     function handleSubmit(e){
+        callbackSearchTerm(searchTerm,true)
         e.preventDefault();
-        axios.get('http://127.0.0.1:5000/search', {params : {searchTerm : searchTerm}})
-        .then(res=>{
-            callback(res.data)
+        // axios.get('http://127.0.0.1:5000/search', {params : {searchTerm : searchTerm}})
+        // axios.get('https://remotive.com/api/remote-jobs?search='+searchTerm)
+        // .then(res=>{
+        //     callback(res.data)
             setSearchIsActive(true)
-        })
-        .catch(err=>{console.log(err)})
-        setSearchTerm('')
+        // })
+        // .catch(err=>{console.log(err)})
+        // setSearchTerm('')
     }
     function handleChange(e){
         setSearchTerm(e.target.value)
     }
     function handleGoBack(){
-        axios.get(`https://remotive.io/api/remote-jobs`)
-        .then(res=>{
-            callback(res.data)
-            setSearchIsActive(false)
-        })
-        .catch(err=>{console.log(err)})
         setSearchTerm('')
+        callbackSearchTerm(searchTerm,false)
+        // axios.get(`https://remotive.io/api/remote-jobs?limit=10&offset=0`)
+        // .then(res=>{
+        //     callback(res.data)
+            setSearchIsActive(false)
+        // })
+        // .catch(err=>{console.log(err)})
     }
     return(
         <>
@@ -45,7 +48,7 @@ export default function SearchBar( { callback }){
             {searchIsActive && (
                 <button  className="text-gray-100 bg-gradient-to-r from-blue-600 to-blue-400 hover:from-blue-900 hover:to-blue-600 ...  px-3 py-1  rounded-md  hover:scale-105 duration-100 mt-5"  
                 onClick={handleGoBack} >
-                    Go back
+                    Clear
                 </button>
                 )
             }
