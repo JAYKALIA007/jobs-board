@@ -13,25 +13,16 @@ export default function FetchJobs(){
     const [offsetValueFilter, setOffsetValueFilter] = useState(0)
 
     const [searchTerm,setSearchTerm] = useState('')
-    function callback(response){
-        if(response === 'No category selected')
-        {
-            setFilterIsActive(false);
-        }
-        else{
-            setFilterIsActive(true)
-            if(response === 'No jobs found. Please change search term.'){
-                setJobsFound(false)
-            }
-            else{
-                setJobs(response.jobs)
-                setJobsFound(true)
-            }
-        }
-    }
+    const [filterTerm,setFilterTerm] = useState('')
+
     function callbackSearchTerm(searchTerm , isActive){
             setSearchIsActive(isActive ? true : false )
             setSearchTerm(searchTerm)
+    }
+    function callbackFilterTerm(myFilterTerm ){
+            setFilterTerm(myFilterTerm)
+            setFilterIsActive(myFilterTerm !=='' ? true : false)
+            setOffsetValueFilter(0)
     }
     useEffect(()=>{
         if(!filterIsActive && !searchIsActive){
@@ -45,9 +36,9 @@ export default function FetchJobs(){
             })
         }
         else if(searchIsActive && !filterIsActive){
-            console.log("search is active")
             axios.get(`https://remotive.com/api/remote-jobs?search=${searchTerm}&limit=10&offset=${offsetValueSearch}`)
             .then(res=>{
+                setJobsFound(res.data.jobs.length > 0 ? true : false)
                 setJobs(res.data.jobs)
                 window.scrollTo(0, 0);
             })
@@ -56,10 +47,15 @@ export default function FetchJobs(){
             })
         }
         else if(filterIsActive && !searchIsActive) {
-            console.log("filter is active")
-            // setJobs([])
+            axios.get('http://127.0.0.1:5000/category_filter',{ params : {filterTerm :filterTerm , offsetValue : offsetValueFilter } })
+                        .then(res=>{
+                            setJobs(res.data.jobs)
+                            window.scrollTo(0, 0);
+                        })
+                        .catch(err=>{console.log(err)})
+            setJobs([])
         }
-    },[filterIsActive , offsetValue, offsetValueSearch, searchIsActive  , searchTerm])
+    },[filterIsActive , offsetValue, offsetValueSearch, offsetValueFilter, searchIsActive  , searchTerm , filterTerm])
 
     function handleNextPage(){
         if(!filterIsActive && !searchIsActive)
@@ -68,9 +64,8 @@ export default function FetchJobs(){
             setOffsetValueSearch(offsetValueSearch+10)
         else if(filterIsActive && !searchIsActive)
             setOffsetValueFilter(offsetValueFilter+10)
-
-        // window.scrollTo(0, 0);
     }
+
     function handlePrevPage(){
         if(!filterIsActive && !searchIsActive)
             setOffsetValue(offsetValue-10)
@@ -78,7 +73,6 @@ export default function FetchJobs(){
             setOffsetValueSearch(offsetValueSearch-10)
         else if(filterIsActive && !searchIsActive)
             setOffsetValueFilter(offsetValueFilter-10)
-        // window.scrollTo(0, 0);
     }
     return(
         <div className="flex" >
@@ -87,6 +81,7 @@ export default function FetchJobs(){
                 <> 
                     <Jobs jobs={jobs}/>
                     <div className="text-center" >
+                        {/* Default next and previous buttons */}
                         { !filterIsActive && !searchIsActive && (
                         <>
                             <button className="bg-gradient-to-r from-blue-600 to-blue-400 
@@ -104,6 +99,7 @@ export default function FetchJobs(){
                             </button>
                         </>
                         )} 
+                        {/* Next and prev buttons when search is active */}
                         { !filterIsActive && searchIsActive && (
                         <>
                             <button className="bg-gradient-to-r from-blue-600 to-blue-400 
@@ -121,6 +117,24 @@ export default function FetchJobs(){
                             </button>
                         </>
                         )}
+                        {/* Next and prev buttons when category filter is active */}
+                        { filterIsActive && !searchIsActive && (
+                        <>
+                            <button className="bg-gradient-to-r from-blue-600 to-blue-400 
+                                            hover:from-blue-900 hover:to-blue-600 ...  px-3 py-1  
+                                            rounded-md  hover:scale-105 duration-100 text-gray-100 my-5 mx-2 " 
+                                    onClick={handleNextPage}
+                            >
+                                Next
+                            </button>
+                            <button className={`text-gray-100 px-3 py-1 rounded-md  m-1 ${ offsetValueFilter > 0 ? "bg-gradient-to-r from-blue-600 to-blue-400 hover:from-blue-900 hover:to-blue-600    hover:scale-105 duration-100" : "bg-blue-300"}`}
+                                    disabled={offsetValueFilter <= 0} 
+                                    onClick={handlePrevPage}
+                            >
+                                Back
+                            </button>
+                        </>
+                        )}
                     </div>
                 </> }
 
@@ -132,8 +146,8 @@ export default function FetchJobs(){
                 )}
             </div>
             <div className="w-1/4 m-8" >
-                <SearchBar  callback={callback} callbackSearchTerm={callbackSearchTerm} />
-                <Categories callback={callback} />
+                <SearchBar  callbackSearchTerm={callbackSearchTerm} />
+                <Categories callbackFilterTerm={callbackFilterTerm}/>
             </div>
         </div>
     )
