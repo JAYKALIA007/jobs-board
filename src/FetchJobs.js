@@ -84,10 +84,8 @@ export default function FetchJobs(){
                         {/* Default next and previous buttons */}
                         { !filterIsActive && !searchIsActive && (
                         <>
-                            <button className="bg-gradient-to-r from-blue-600 to-blue-400 
-                                            hover:from-blue-900 hover:to-blue-600 ...  px-3 py-1  
-                                            rounded-md  hover:scale-105 duration-100 text-gray-100 my-5 mx-2 " 
-                                    onClick={handleNextPage}
+                            <button className={`text-gray-100 px-3 py-1 rounded-md  m-1 ${ jobs.length >= 10 ? "bg-gradient-to-r from-blue-600 to-blue-400 hover:from-blue-900 hover:to-blue-600    hover:scale-105 duration-100" : "bg-blue-300"}`} 
+                                    onClick={handleNextPage} disabled={jobs.length < 10}
                             >
                                 Next
                             </button>
@@ -102,10 +100,8 @@ export default function FetchJobs(){
                         {/* Next and prev buttons when search is active */}
                         { !filterIsActive && searchIsActive && (
                         <>
-                            <button className="bg-gradient-to-r from-blue-600 to-blue-400 
-                                            hover:from-blue-900 hover:to-blue-600 ...  px-3 py-1  
-                                            rounded-md  hover:scale-105 duration-100 text-gray-100 my-5 mx-2 " 
-                                    onClick={handleNextPage}
+                            <button className={`text-gray-100 px-3 py-1 rounded-md  m-1 ${ jobs.length >= 10 ? "bg-gradient-to-r from-blue-600 to-blue-400 hover:from-blue-900 hover:to-blue-600    hover:scale-105 duration-100" : "bg-blue-300"}`} 
+                                    onClick={handleNextPage} disabled={jobs.length < 10}
                             >
                                 Next
                             </button>
@@ -120,10 +116,8 @@ export default function FetchJobs(){
                         {/* Next and prev buttons when category filter is active */}
                         { filterIsActive && !searchIsActive && (
                         <>
-                            <button className="bg-gradient-to-r from-blue-600 to-blue-400 
-                                            hover:from-blue-900 hover:to-blue-600 ...  px-3 py-1  
-                                            rounded-md  hover:scale-105 duration-100 text-gray-100 my-5 mx-2 " 
-                                    onClick={handleNextPage}
+                            <button className={`text-gray-100 px-3 py-1 rounded-md  m-1 ${ jobs.length >= 10 ? "bg-gradient-to-r from-blue-600 to-blue-400 hover:from-blue-900 hover:to-blue-600    hover:scale-105 duration-100" : "bg-blue-300"}`} 
+                                    onClick={handleNextPage} disabled={jobs.length < 10}
                             >
                                 Next
                             </button>
