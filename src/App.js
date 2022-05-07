@@ -1,7 +1,7 @@
 import './App.css';
 import NavBar from './NavBar'
 import FetchJobs from './FetchJobs'
-import Profile from './Profile'
+import Profile from './Profile/Profile'
 import ApplyForm from './ApplyToAJob/ApplyForm'
 import { Routes, Route } from "react-router-dom";
 
