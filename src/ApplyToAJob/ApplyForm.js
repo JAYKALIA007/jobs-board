@@ -7,11 +7,15 @@ import axios from "axios"
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { v4 as uuidv4 } from 'uuid';
+import { useAuth0 } from "@auth0/auth0-react";
 
 export default function ApplyForm(){
     const { jobId } = useParams()
-    // let [formNo , setFormFields] = useState(1)
+    const { user } = useAuth0();
     const [isSubmitted , setIsSubmitted] = useState(false)
+
+    
+
     const [ formFields , setFormFields ] = useState (  { 
     
         formNo : 1,
@@ -62,7 +66,14 @@ export default function ApplyForm(){
         e.preventDefault();
 
         try {
-            const res = await axios.post('http://127.0.0.1:5000/apply',{ jobId:jobId , userDetails : formFields })
+            const res = await axios.post('http://127.0.0.1:5000/apply',
+            { jobId:jobId , 
+                userDetails : { 
+                    userInfo : formFields.userInfo , 
+                    educationInfo : { edInfo : formFields.educationInfo} , 
+                    jobExperienceInfo :{ jobExInfo :  formFields.jobExperienceInfo} 
+                } , 
+                uuid : user.sub.split('|')[1] })
             console.log(res.data)
         } catch (err) {
             console.log(err)
@@ -74,7 +85,6 @@ export default function ApplyForm(){
           }, 2000);
     }
     function handleAddRowToForms(formName){
-        console.log(formName);
         if(formName === 'education details form'){
             setFormFields({
                 ...formFields,
