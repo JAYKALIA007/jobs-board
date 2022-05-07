@@ -1,8 +1,8 @@
 import axios from "axios";
 import { useState , useEffect } from "react";
 import Jobs from "./Jobs"
-import Categories from './Categories'
-import SearchBar from './SearchBar'
+import Categories from '../CategoryFilter/Categories'
+import SearchBar from '../SearchBar'
 export default function FetchJobs(){
     const [jobs, setJobs] = useState([]);
     const [filterIsActive, setFilterIsActive] = useState(false);
