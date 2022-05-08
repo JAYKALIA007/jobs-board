@@ -11,7 +11,7 @@ function App() {
       <NavBar/>
       <Routes>
         <Route path="/" element={<FetchJobs />}  />
-        <Route path="/user_profile" element={<Profile />}  />
+        <Route path="/profile/u=:uId" element={<Profile />}  />
         <Route path="apply/jobId=:jobId" element={<ApplyForm />} />
       </Routes>
     </div>
