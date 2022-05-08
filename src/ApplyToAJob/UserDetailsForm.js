@@ -6,7 +6,7 @@ export default function UserDetailsForm({ nextPage , handleChange , formFields})
 
             </div>
             <div className="w-2/4" >
-                <h2 className="text-center font-bold text-2xl italic " >User Details{formFields.formNo}</h2>
+                <h2 className="text-center font-bold text-2xl italic " >Personal Information</h2>
 
                 <form  className="px-30"  >
                     <label className="relative block">
@@ -58,6 +58,11 @@ export default function UserDetailsForm({ nextPage , handleChange , formFields})
                                       hover:scale-105 duration-100 " 
                                       value={formFields.formNo} 
                                       onClick={nextPage}>Next</button>
+                <div className="text-center my-5" >
+                    <li className="active">1</li>
+                    <li className="active">2</li>
+                    <li className="active">3</li>
+                </div>
             </div>
 
             <div className="w-1/4" >

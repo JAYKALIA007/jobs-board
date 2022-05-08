@@ -5,7 +5,7 @@ export default function StudyDetailsForm({ nextPage , prevPage, handleChange , f
 
             </div>
             <div className="w-2/4" >
-                <h2 className="text-center font-bold text-2xl italic " >Study Details{formFields.formNo}</h2>
+                <h2 className="text-center font-bold text-2xl italic " >Education Info</h2>
 
                 <form  className="px-30"  >
                     {
@@ -64,6 +64,12 @@ export default function StudyDetailsForm({ nextPage , prevPage, handleChange , f
                 <button  className=" text-gray-100 bg-gradient-to-r from-blue-600 to-blue-400 hover:from-blue-900 hover:to-blue-600 ...  px-3 py-1  rounded-md  hover:scale-105 duration-100 m-1" value={formFields.formNo} onClick={prevPage}>Previous</button>
                 <button  className=" text-gray-100 bg-gradient-to-r from-blue-600 to-blue-400 hover:from-blue-900 hover:to-blue-600 ...  px-3 py-1  rounded-md  hover:scale-105 duration-100 m-1" value={formFields.formNo} onClick={nextPage}>Next</button>
                 <button  className=" text-gray-100 bg-gradient-to-r from-blue-600 to-blue-400 hover:from-blue-900 hover:to-blue-600 ...  px-3 py-1  rounded-md  hover:scale-105 duration-100 m-1" onClick={event=>{handleAddRowToEducationForm('education details form')}}>Add More Info</button>
+
+                <div className="text-center my-5" >
+                    <li>1</li>
+                    <li className="active">2</li>
+                    <li className="active">3</li>
+                </div>
             </div>
 
             <div className="w-1/4" >

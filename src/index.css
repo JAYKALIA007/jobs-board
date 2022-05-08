@@ -1,3 +1,43 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+li {
+    width: 2em;
+    height: 2em;
+    text-align: center;
+    line-height: 2em;
+    border-radius: 1em;
+    background: linear-gradient(to right, #2A68EC, #5FA4FA);
+    margin: 0 1em;
+    display: inline-block;
+    color: white;
+    position: relative;
+  }
+  
+  li::before{
+    content: '';
+    position: absolute;
+    top: .9em;
+    left: -4em;
+    width: 4em;
+    height: .2em;
+    background: linear-gradient(to right, #2A68EC, #5FA4FA);
+    z-index: -1;
+  }
+  
+  
+  li:first-child::before {
+    display: none;
+  }
+  
+  .active {
+    background: linear-gradient(to right, #2A68EC, #5FA4FA);
+  }
+  
+  .active ~ li {
+    background: lightblue;
+  }
+  
+  .active ~ li::before {
+    background: lightblue;
+  }
