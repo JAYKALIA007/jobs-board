@@ -4,8 +4,8 @@ import Jobs from "./Jobs"
 import Categories from '../CategoryFilter/Categories'
 import SearchBar from '../SearchBar'
 export default function FetchJobs(){
-    const [jobs, setJobs] = useState([]);
-    const [filterIsActive, setFilterIsActive] = useState(false);
+    const [jobs, setJobs] = useState([])
+    const [filterIsActive, setFilterIsActive] = useState(false)
     const [searchIsActive , setSearchIsActive] = useState(false)
     const [jobsFound , setJobsFound] = useState(true)
     const [offsetValue, setOffsetValue] = useState(0)
@@ -28,6 +28,7 @@ export default function FetchJobs(){
         if(!filterIsActive && !searchIsActive){
             axios.get(`https://remotive.io/api/remote-jobs?limit=10&offset=${offsetValue}`)
             .then(res=>{
+                setJobsFound(res.data.jobs.length > 0 ? true : false)
                 setJobs(res.data.jobs)
                 window.scrollTo(0, 0);
             })
@@ -49,13 +50,14 @@ export default function FetchJobs(){
         else if(filterIsActive && !searchIsActive) {
             axios.get('http://127.0.0.1:5000/category_filter',{ params : {filterTerm :filterTerm , offsetValue : offsetValueFilter } })
                         .then(res=>{
+                            setJobsFound(res.data.jobs.length > 0 ? true : false)
                             setJobs(res.data.jobs)
                             window.scrollTo(0, 0);
                         })
                         .catch(err=>{console.log(err)})
             setJobs([])
         }
-    },[filterIsActive , offsetValue, offsetValueSearch, offsetValueFilter, searchIsActive  , searchTerm , filterTerm])
+    },[filterIsActive , searchIsActive , offsetValue, offsetValueSearch, offsetValueFilter  , searchTerm , filterTerm])
 
     function handleNextPage(){
         if(!filterIsActive && !searchIsActive)

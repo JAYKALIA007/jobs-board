@@ -12,7 +12,7 @@ export default function SearchBar( { callback , callbackSearchTerm }){
     }
     function handleGoBack(){
         setSearchTerm('')
-        callbackSearchTerm(searchTerm,false)
+        callbackSearchTerm('',false)
         setSearchIsActive(false)    
     }
     return(

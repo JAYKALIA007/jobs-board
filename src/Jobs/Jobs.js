@@ -1,6 +1,5 @@
 import JobCard from "./JobCard"
 export default function Jobs( { jobs } ){
-
     const displayJobs = jobs===[] ? (
     <div className="text-slate-400  italic">
         Loading categories. Hang on...
