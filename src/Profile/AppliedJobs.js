@@ -14,7 +14,7 @@ export default function AppliedJobs(){
     },[])
     return(
         <>
-            <p className="text-4xl font-bold italic" >No of applied jobs : {noOfAppliedJobs}</p>
+            <p className=" mobile_s:text-2xl sm:text-4xl font-bold italic" >No of applied jobs : {noOfAppliedJobs}</p>
         </>
     )
 }

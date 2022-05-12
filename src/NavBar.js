@@ -16,17 +16,17 @@ export default function NavBar(){
         },
       }));
     return(
-        <div className="max-w-full text-gray-200 bg-gradient-to-r from-blue-700 to-blue-300  p-5 flex " >
+        <div className="max-w-full text-gray-200 bg-gradient-to-r from-blue-700 to-blue-300  mobile_s:p-3 md:p-5 flex " >
             <div className=" w-1/2 m-2 " >
                 <Link to="/" className="text-2xl " >Jobs Board</Link>
             </div>
             <div className=" w-1/2 m-2" >
-                <div className="grid grid-cols-6 text-center">
+                <div className="grid mobile_s:grid-cols-3 sm:grid-cols-5 lg:grid-cols-6  text-center">
                     {/* the following divs are used for creating columns */}
-                    <div ></div> 
-                    <div ></div>
-                    <div ></div>
-                    <div ></div>
+                    <div className=" mobile_s:hidden sm:hidden lg:block" ></div> 
+                    <div className=" mobile_s:hidden sm:block " ></div>
+                    <div className=" mobile_s:hidden sm:block "></div>
+                    <div></div>
                     {/* above divs used for spacing */}
                     <div>
                         {isAuthenticated && 
@@ -34,8 +34,8 @@ export default function NavBar(){
                                 <LightTooltip title={<h5 className="text-xs text-slate-600 font-thin italic" >View Profile</h5>} enterDelay={200} leaveDelay={200} arrow>
                                     <Link to={`/profile/u=${user.sub.split('|')[1]}`}>
                                         <img src={user.picture} alt="user profile" 
-                                            className="border-2 rounded-full drop-shadow-md	 inline hover:drop-shadow-2xl  hover:border-gray-100 " 
-                                            width="40px"/>
+                                            className="border-2 rounded-full drop-shadow-md	 inline hover:drop-shadow-2xl  hover:border-gray-100 mobile_s:w-8 sm:w-10 " 
+                                            />
                                     </Link>
                                 </LightTooltip>
                             )
