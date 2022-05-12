@@ -8,10 +8,10 @@ export default function Profile(){
   }
   return (
     isAuthenticated && (
-      <div className="flex text-gray-600" >
-        <div className="w-1/3 p-5 m-5" >
+      <div className="sm:flex text-gray-600" >
+        <div className="sm:w-1/3  mobile_s:my-2  sm:my-5 sm:p-5" >
           <div className="p-5">
-            <img className = "rounded-full" src={user.picture} alt={user.name} width="90%"/>
+            <img className = "rounded-full mobile_s:w-32 sm:w-48" src={user.picture} alt={user.name} />
           </div>
           <div className="px-10">
             <h2 className="text-2xl font-semibold text-black">{user.name}</h2>
@@ -20,7 +20,7 @@ export default function Profile(){
             <p className="text-sm m-1" >{user.email}</p>
           </div>
         </div>
-        <div className="w-2/3 p-5 m-5" >
+        <div className="sm:w-2/3 p-5 m-5" >
           <AppliedJobs user={user} />
           <UserInfo  user={user} />
         </div>

@@ -17,7 +17,7 @@ export default function SearchBar( { callback , callbackSearchTerm }){
     }
     return(
         <>
-            <form onSubmit={handleSubmit}>
+            <form className="mobile_s:hidden sm:block" onSubmit={handleSubmit}>
                 <label className="relative block">
                     <span className="sr-only">Search</span>
                     <input className="placeholder:italic placeholder:text-slate-400 
@@ -32,8 +32,23 @@ export default function SearchBar( { callback , callbackSearchTerm }){
                             />
                 </label>
             </form>
+            <form className="sm:hidden mt-5" onSubmit={handleSubmit}>
+                <label className="relative block">
+                    <span className="sr-only">Search</span>
+                    <input className="placeholder:italic placeholder:text-slate-400 
+                                    block bg-white border border-slate-300 
+                                    rounded-md shadow-sm focus:outline-none 
+                                    focus:border-sky-500 focus:ring-sky-500 mx-12 w-64 pl-3 py-1
+                                    focus:ring-1 text-sm" 
+                            placeholder="Search for anything..." 
+                            type="text" name="search"
+                            onChange={handleChange}
+                            value={searchTerm}
+                            />
+                </label>
+            </form>
             {searchIsActive && (
-                <button  className="text-gray-100 bg-gradient-to-r from-blue-600 to-blue-400 hover:from-blue-900 hover:to-blue-600 ...  px-3 py-1  rounded-md  hover:scale-105 duration-100 mt-5"  
+                <button  className="text-gray-100 bg-gradient-to-r from-blue-600 to-blue-400 hover:from-blue-900 hover:to-blue-600 ...  px-3 py-1  rounded-md  hover:scale-105 duration-100 m-5"  
                 onClick={handleGoBack} >
                     Clear
                 </button>

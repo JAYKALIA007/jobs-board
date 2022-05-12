@@ -23,7 +23,7 @@ export default function Categories( { callbackFilterTerm }){
         }
     },[categories])
     return(
-        <div className='my-12 mx-2'>
+        <div className='my-8 mx-2 mobile_s:w-9/12 mobile_s:mx-auto sm:w-full '>
             <strong className='text-gray-600 text-2xl italic ' >Filter via categories : </strong>
             <DisplayCategories categories={categories[0]} callbackFilterTerm={callbackFilterTerm}/>
         </div>

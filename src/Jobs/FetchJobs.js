@@ -77,8 +77,12 @@ export default function FetchJobs(){
             setOffsetValueFilter(offsetValueFilter-10)
     }
     return(
-        <div className="flex" >
-            <div className="w-3/4 ">
+        <div className=" sm:flex" >
+            <div className="sm:hidden" >
+                <SearchBar  callbackSearchTerm={callbackSearchTerm} />
+                <Categories callbackFilterTerm={callbackFilterTerm}/>
+            </div>
+            <div className="sm:w-3/4 ">
                 {jobsFound && 
                 <> 
                     <Jobs jobs={jobs}/>
@@ -141,7 +145,7 @@ export default function FetchJobs(){
                     </div>
                 )}
             </div>
-            <div className="w-1/4 m-8" >
+            <div className="sm:block sm:w-1/4 m-8 mobile_s:hidden" >
                 <SearchBar  callbackSearchTerm={callbackSearchTerm} />
                 <Categories callbackFilterTerm={callbackFilterTerm}/>
             </div>
