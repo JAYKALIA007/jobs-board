@@ -41,4 +41,5 @@ Finally, once you've confirmed the details. Click on submit.
 
 ## Project structure and Screenshots
 
- _**[Open in Figma](https://www.figma.com/file/gGWAtembCMdUwymDlvhE8m/JOBS-BOARD?node-id=0%3A1).**_
+ <a href="https://www.figma.com/file/gGWAtembCMdUwymDlvhE8m/JOBS-BOARD?node-id=0%3A1" target="_blank">_**Open In Figma**_</a>
+
