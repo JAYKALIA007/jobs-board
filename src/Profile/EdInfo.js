@@ -3,19 +3,30 @@ export default function EdInfo( { userInfo } ){
     let index=1;
     const edInfo = userInfo=== undefined ? 'Loading' : (userInfo.educationInfo.edInfo.map(edInfoRow=>{
         return(
-            <div key={index++} >
-                {index}.
-                <p>{edInfoRow.highestEducation}</p>
-                <p>{edInfoRow.institutionName}</p>
-                <p>{edInfoRow.grade}</p>
-                <p>{edInfoRow.branch}</p>
-                <br/>
-            </div>
+            <tr key={index++} className="text-center border-b">
+                <td className="p-1" >{edInfoRow.highestEducation}</td>
+                <td className="p-1" >{edInfoRow.institutionName}</td>
+                <td className="p-1" >{edInfoRow.grade}</td>
+                <td className="p-1" >{edInfoRow.branch}</td>
+            </tr>
         )
     }))
     return(
         <>
-            {edInfo}
+            <table className="table-auto w-11/12">
+                <thead >
+                    <tr className="bg-slate-100">
+                    <th className="w-1/4 p-2" >Course</th>
+                    <th className="w-1/4 p-2" >Institute</th>
+                    <th className="w-1/4 p-2" >Grade</th>
+                    <th className="w-1/4 p-2" >Branch</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {edInfo}
+                </tbody>
+            </table>
+
         </>
     )
 }
