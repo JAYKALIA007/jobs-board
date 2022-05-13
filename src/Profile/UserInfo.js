@@ -1,7 +1,7 @@
 import  { useState , useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react'
 import axios from 'axios';
-import PersonalInfo from './PersonalInfo'
+// import PersonalInfo from './PersonalInfo'
 import EdInfo from './EdInfo'
 import JobExInfo from './JobExInfo';
 export default function UserInfo(){
@@ -20,10 +20,11 @@ export default function UserInfo(){
     },[])
         return(
         <>
-            <PersonalInfo userInfo = {userInfo} />
-            <hr/>
+            {/* <PersonalInfo userInfo = {userInfo} />
+            <hr/> */}
+            <h3 className="text-2xl my-5 font-bold" >Education Info</h3>
             <EdInfo userInfo = {userInfo} />
-            <hr/>
+            <h3 className="text-2xl my-5 font-bold" >Job Ex Info</h3>
             <JobExInfo userInfo = {userInfo} />
         </>
     )

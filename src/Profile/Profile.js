@@ -1,10 +1,15 @@
 import { useAuth0 } from "@auth0/auth0-react";
+import { useState } from 'react'
 import AppliedJobs from "./AppliedJobs";
 import UserInfo from "./UserInfo";
 export default function Profile(){
   const { user, isAuthenticated, isLoading } = useAuth0();
+  const [ noOfAppliedJobs , setNoOfAppliedJobs] = useState(0)
   if (isLoading) {
     return <div>Loading ...</div>;
+  }
+  function callbackFromAppliedJobs(num){
+    setNoOfAppliedJobs(num)
   }
   return (
     isAuthenticated && (
@@ -20,11 +25,10 @@ export default function Profile(){
             <p className="text-sm m-1" >{user.email}</p>
           </div>
         </div>
-        <div className="sm:w-2/3 p-5 m-5" >
-          <AppliedJobs user={user} />
-          <UserInfo  user={user} />
+        <div className="sm:w-2/3 p-5" >
+          <AppliedJobs user={user} callbackToProfile={callbackFromAppliedJobs} />
+          { ( noOfAppliedJobs > 0 ) ? <UserInfo  user={user} /> : <p className="text-2xl my-10">No user info found</p>}
         </div>
-
       </div>
     )
   )
